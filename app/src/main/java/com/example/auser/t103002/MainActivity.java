@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     ListView lv;
     MyDataHandler dataHandler;
-    ArrayAdapter<String> adapter;
-    Context context = this;
+//    ArrayAdapter<String> adapter;
+    MyAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         lv = (ListView) findViewById(R.id.listView);
         dataHandler = new MyDataHandler();
-        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, dataHandler.titles);
+        adapter = new MyAdapter(MainActivity.this, dataHandler);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener (new MyItemClick());
         getData();
@@ -104,14 +104,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }.start();
     }
-    public void clickGet(View v)
-    {
-        dataHandler = new MyDataHandler();
-        adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1, dataHandler.titles);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener (new MyItemClick());
-        getData();
-    }
+//    public void clickGet(View v)
+//    {
+//        dataHandler = new MyDataHandler();
+//        lv.setAdapter(adapter);
+//        lv.setOnItemClickListener (new MyItemClick());
+//        getData();
+//    }
 
     private class MyItemClick implements android.widget.AdapterView.OnItemClickListener {
 
