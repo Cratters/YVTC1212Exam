@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -34,25 +35,21 @@ import javax.xml.parsers.SAXParserFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button button;
     ListView lv;
     MyDataHandler dataHandler;
-//    ArrayAdapter<String> adapter;
     MyAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getData();
         lv = (ListView) findViewById(R.id.listView);
         dataHandler = new MyDataHandler();
         adapter = new MyAdapter(MainActivity.this, dataHandler);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener (new MyItemClick());
-        getData();
     }
-
-
 
     void getData() {
 
@@ -104,47 +101,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }.start();
     }
-//    public void clickGet(View v)
-//    {
-//        dataHandler = new MyDataHandler();
-//        lv.setAdapter(adapter);
-//        lv.setOnItemClickListener (new MyItemClick());
-//        getData();
-//    }
 
     private class MyItemClick implements android.widget.AdapterView.OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            Uri uri = Uri.parse(dataHandler.links.get(position));
-//            Intent i = new Intent(Intent.ACTION_VIEW, uri);
-//            startActivity(i);
             Intent it = new Intent(MainActivity.this, WebViewEx.class);
             it.putExtra("url", dataHandler.links.get(position));
             startActivity(it);
         }
-    }
-
-    public void clickTest(View v)
-    {
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                try {
-                    Thread.sleep(2000);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            //tv.setText("Okay!!!");
-                        }
-                    });
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }.start();
     }
 }

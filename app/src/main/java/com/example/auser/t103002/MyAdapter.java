@@ -63,8 +63,10 @@ public class MyAdapter extends BaseAdapter {
 
         //final String msg = str[position];
 
+        Log.d("imgUri", "position:"+ position + dataHandler.titles.get(position));
         holder.tv.setText(dataHandler.titles.get(position));
-        if (!dataHandler.imgs.get(position).equals(""))
+        Log.d("imgUri", "position:"+ position + dataHandler.imgs.get(position));
+//        if (!dataHandler.imgs.get(position).equals(""))
             Picasso.with(context).load(dataHandler.imgs.get(position)).into(holder.iv);
         return convertView;
     }

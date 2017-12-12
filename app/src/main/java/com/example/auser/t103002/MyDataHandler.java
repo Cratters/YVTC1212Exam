@@ -61,6 +61,10 @@ public class MyDataHandler extends DefaultHandler {
         {
             isLink = false;
         }
+        if (qName.equals("description"))
+        {
+            isImg = false;
+        }
     }
 
     @Override
@@ -79,20 +83,21 @@ public class MyDataHandler extends DefaultHandler {
             Log.d("MyLink", data);
             links.add(data);
         }
-        String imgData;
+
+//        String imgData;
         if (isImg && isItem)
         {
             String data = new String(ch, start, length);
             int indexStart = data.indexOf("='");
             int indexEnd = data.indexOf("'>");
-            if (indexStart!=-1 || indexEnd!=-1) {
-                Log.d("MyImg", indexStart+", "+indexEnd);
-                imgData = data.substring(indexStart+2, indexEnd - indexStart+2);
-                Log.d("MyImg", imgData);
+            Log.d("MyImg", indexStart+", "+indexEnd);
+            if (indexStart==-1 || indexEnd==-1) {
+                data = "R.drawable/mipmap/ic_launcher";
             } else {
-                imgData = "";
+                data = data.substring(indexStart+2, indexEnd - indexStart+2);
+                Log.d("MyImg", data);
             }
-            imgs.add(imgData);
+            imgs.add(data);
         }
     }
 }
