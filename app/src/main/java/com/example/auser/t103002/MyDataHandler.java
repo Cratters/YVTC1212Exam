@@ -20,6 +20,7 @@ public class MyDataHandler extends DefaultHandler {
     public ArrayList<String> titles = new ArrayList();
     public ArrayList<String> links = new ArrayList();
     public ArrayList<String> imgs = new ArrayList();
+    public ArrayList<String> context = new ArrayList();
     StringBuilder titleTemp = new StringBuilder();
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -84,20 +85,37 @@ public class MyDataHandler extends DefaultHandler {
             links.add(data);
         }
 
-//        String imgData;
+        String conData;
+        String imgData;
         if (isImg && isItem)
         {
             String data = new String(ch, start, length);
-            int indexStart = data.indexOf("='");
-            int indexEnd = data.indexOf("'>");
-            Log.d("MyImg", indexStart+", "+indexEnd);
-            if (indexStart==-1 || indexEnd==-1) {
-                data = "R.drawable/mipmap/ic_launcher";
+            int imgStart = data.indexOf("='");
+            int imgEnd = data.indexOf("'>");
+
+            int conStart = data.indexOf("<p>", imgEnd);
+            if (conStart == -1)
+                conStart = 0;
+            else
+                conStart+=3;
+
+            Log.d("MyImg", imgStart+", "+imgEnd);
+            if (imgStart==-1 || imgEnd==-1) {
+                imgData = "R.drawable/mipmap/ic_launcher";
             } else {
-                data = data.substring(indexStart+2, indexEnd - indexStart+2);
-                Log.d("MyImg", data);
+                imgData = data.substring(imgStart+2, imgEnd - imgStart+2);
+                Log.d("MyImg", imgData);
             }
-            imgs.add(data);
+            imgs.add(imgData);
+
+            if(data.length()>63) {
+                conData = data.substring(conStart, conStart + 62);
+                Log.d("MyContext", conData);
+            } else {
+                conData = "Read more";
+            }
+//            Log.d("MyContext", conData);
+            context.add(conData);
         }
     }
 }

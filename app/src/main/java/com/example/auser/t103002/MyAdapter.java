@@ -55,6 +55,7 @@ public class MyAdapter extends BaseAdapter {
             convertView = layoutInflater.inflate(R.layout.listview, null);
             holder = new ViewHolder();
             holder.tv = (TextView) convertView.findViewById(R.id.textView);
+            holder.tv2 = (TextView) convertView.findViewById(R.id.textView2);
             holder.iv = (ImageView) convertView.findViewById(R.id.imageView);
             convertView.setTag(holder);
         } else {
@@ -65,6 +66,7 @@ public class MyAdapter extends BaseAdapter {
 
         Log.d("imgUri", "position:"+ position + dataHandler.titles.get(position));
         holder.tv.setText(dataHandler.titles.get(position));
+        holder.tv2.setText(dataHandler.context.get(position));
         Log.d("imgUri", "position:"+ position + dataHandler.imgs.get(position));
 //        if (!dataHandler.imgs.get(position).equals(""))
             Picasso.with(context).load(dataHandler.imgs.get(position)).into(holder.iv);
@@ -73,6 +75,7 @@ public class MyAdapter extends BaseAdapter {
     static class ViewHolder
     {
         TextView tv;
+        TextView tv2;
         ImageView iv;
     }
 }
