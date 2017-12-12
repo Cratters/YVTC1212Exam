@@ -101,7 +101,7 @@ public class MyDataHandler extends DefaultHandler {
 
             Log.d("MyImg", imgStart+", "+imgEnd);
             if (imgStart==-1 || imgEnd==-1) {
-                imgData = "R.drawable/mipmap/ic_launcher";
+                imgData = "";
             } else {
                 imgData = data.substring(imgStart+2, imgEnd - imgStart+2);
                 Log.d("MyImg", imgData);

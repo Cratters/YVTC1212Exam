@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import static com.example.auser.t103002.R.mipmap.ic_launcher;
+
 /**
  * Created by auser on 2017/11/9.
  */
@@ -68,8 +70,10 @@ public class MyAdapter extends BaseAdapter {
         holder.tv.setText(dataHandler.titles.get(position));
         holder.tv2.setText(dataHandler.context.get(position));
         Log.d("imgUri", "position:"+ position + dataHandler.imgs.get(position));
-//        if (!dataHandler.imgs.get(position).equals(""))
+        if (!dataHandler.imgs.get(position).equals(""))
             Picasso.with(context).load(dataHandler.imgs.get(position)).into(holder.iv);
+        else
+            holder.iv.setImageResource(ic_launcher);
         return convertView;
     }
     static class ViewHolder
